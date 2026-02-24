@@ -936,6 +936,34 @@
       .contact-inner { grid-template-columns: 1fr; gap: 40px; }
       .timeline-item { grid-template-columns: 80px 1px 1fr; gap: 0 16px; }
     }
+
+    /* ── MOBILE NAVIGATION FIX ── */
+    @media (max-width: 768px) {
+      /* Stack the logo and the links vertically */
+      nav {
+        flex-direction: column;
+        padding: 16px 20px;
+        gap: 16px;
+      }
+
+      /* Allow the links to wrap instead of cutting off */
+      .nav-links {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 12px 20px; /* 12px vertical gap, 20px horizontal gap */
+        padding: 0;
+      }
+
+      .nav-links li {
+        margin: 0; /* Clears any previous margins */
+      }
+      
+      .nav-links a {
+        font-size: 0.95rem; /* Slightly smaller text for mobile */
+      }
+    }
   </style>
 </head>
 <body>
