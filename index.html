@@ -1,0 +1,1095 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Alberto Maria Mongardini – Researcher</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0c0f14;
+      --surface: #13171f;
+      --surface2: #1a1f2b;
+      --border: rgba(255,255,255,0.06);
+      --accent: #3de8a0;
+      --accent2: #5b8fff;
+      --accent3: #ff6b6b;
+      --text: #e8ecf4;
+      --text-muted: #7a8499;
+      --text-dim: #4a5268;
+      --radius: 14px;
+      --font-head: 'Syne', sans-serif;
+      --font-body: 'DM Sans', sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* Animated background grid */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(61,232,160,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(61,232,160,0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    /* Glow blobs */
+    .blob {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(120px);
+      opacity: 0.12;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .blob-1 { width: 600px; height: 600px; background: var(--accent); top: -200px; right: -100px; }
+    .blob-2 { width: 500px; height: 500px; background: var(--accent2); bottom: 10%; left: -150px; }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 48px;
+      background: rgba(12,15,20,0.75);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: var(--font-head);
+      font-weight: 800;
+      font-size: 1.1rem;
+      color: var(--text);
+      letter-spacing: -0.02em;
+    }
+
+    .nav-logo span { color: var(--accent); }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--accent); }
+
+    /* WRAPPER */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 40px;
+      position: relative;
+      z-index: 1;
+    }
+
+    section { padding: 100px 0; }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding-top: 80px;
+    }
+
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(61,232,160,0.08);
+      border: 1px solid rgba(61,232,160,0.2);
+      color: var(--accent);
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border-radius: 100px;
+      margin-bottom: 24px;
+      animation: fadeUp 0.6s ease both;
+    }
+
+    .hero-tag::before {
+      content: '';
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.8); }
+    }
+
+    h1 {
+      font-family: var(--font-head);
+      font-size: clamp(2.6rem, 4.5vw, 4rem);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      color: var(--text);
+      animation: fadeUp 0.6s 0.1s ease both;
+    }
+
+    h1 .highlight {
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-sub {
+      margin-top: 20px;
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      font-weight: 300;
+      max-width: 480px;
+      animation: fadeUp 0.6s 0.2s ease both;
+    }
+
+    .hero-sub strong { color: var(--text); font-weight: 500; }
+
+    .hero-cta {
+      display: flex;
+      gap: 14px;
+      margin-top: 36px;
+      animation: fadeUp 0.6s 0.3s ease both;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 24px;
+      border-radius: 10px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #0c0f14;
+    }
+    .btn-primary:hover { background: #5ef5b3; transform: translateY(-2px); box-shadow: 0 8px 30px rgba(61,232,160,0.3); }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-ghost:hover { border-color: rgba(255,255,255,0.15); background: var(--surface); transform: translateY(-2px); }
+
+    /* Stats */
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      animation: fadeUp 0.6s 0.4s ease both;
+    }
+
+    .stat {
+      background: var(--surface);
+      padding: 24px 20px;
+      text-align: center;
+    }
+
+    .stat-num {
+      font-family: var(--font-head);
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--accent);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-top: 4px;
+    }
+
+    /* Right col card */
+    .hero-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 36px;
+      animation: fadeUp 0.6s 0.2s ease both;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+    }
+
+    .hero-card-avatar {
+      width: 72px; height: 72px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-head);
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: #0c0f14;
+      margin-bottom: 20px;
+    }
+
+    .hero-card h3 {
+      font-family: var(--font-head);
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .hero-card .role {
+      color: var(--accent);
+      font-size: 0.85rem;
+      font-weight: 500;
+      margin-bottom: 20px;
+    }
+
+    .info-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+
+    .info-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .info-list .icon {
+      width: 32px; height: 32px;
+      border-radius: 8px;
+      background: var(--surface2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .info-list strong { color: var(--text); display: block; font-size: 0.88rem; }
+
+    /* ── SECTION HEADERS ── */
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 56px;
+    }
+
+    .section-tag {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      background: rgba(61,232,160,0.08);
+      border: 1px solid rgba(61,232,160,0.18);
+      padding: 4px 12px;
+      border-radius: 100px;
+    }
+
+    h2 {
+      font-family: var(--font-head);
+      font-size: clamp(1.8rem, 3vw, 2.4rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+
+    /* ── PUBLICATIONS ── */
+    #publications { background: var(--surface); }
+
+    .pub-grid { display: flex; flex-direction: column; gap: 16px; }
+
+    .pub-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px 28px;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 20px;
+      align-items: start;
+      transition: border-color 0.2s, transform 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .pub-card:hover {
+      border-color: rgba(61,232,160,0.25);
+      transform: translateX(4px);
+    }
+
+    .pub-venue {
+      writing-mode: vertical-rl;
+      text-orientation: mixed;
+      transform: rotate(180deg);
+      font-family: var(--font-head);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      padding: 4px 0;
+    }
+
+    .pub-venue.top { color: var(--accent); }
+    .pub-venue.a { color: var(--accent2); }
+
+    .pub-body {}
+
+    .pub-title {
+      font-family: var(--font-head);
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 6px;
+      line-height: 1.3;
+    }
+
+    .pub-authors {
+      font-size: 0.83rem;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .pub-authors strong { color: var(--accent); }
+
+    .pub-meta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 100px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .badge-top { background: rgba(61,232,160,0.1); color: var(--accent); border: 1px solid rgba(61,232,160,0.2); }
+    .badge-a { background: rgba(91,143,255,0.1); color: var(--accent2); border: 1px solid rgba(91,143,255,0.2); }
+    .badge-year { background: var(--surface2); color: var(--text-muted); border: 1px solid var(--border); }
+
+    /* ── EXPERIENCE TIMELINE ── */
+    .timeline { display: flex; flex-direction: column; gap: 0; }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 140px 1px 1fr;
+      gap: 0 28px;
+      position: relative;
+    }
+
+    .timeline-date {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      text-align: right;
+      padding-top: 4px;
+      font-variant-numeric: tabular-nums;
+      line-height: 1.4;
+    }
+
+    .timeline-line {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .timeline-dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: 2px solid var(--bg);
+      flex-shrink: 0;
+      margin-top: 8px;
+      box-shadow: 0 0 0 3px rgba(61,232,160,0.15);
+    }
+
+    .timeline-connector {
+      flex: 1;
+      width: 1px;
+      background: linear-gradient(to bottom, var(--accent), var(--border));
+      min-height: 40px;
+      opacity: 0.3;
+    }
+
+    .timeline-item:last-child .timeline-connector { display: none; }
+
+    .timeline-content {
+      padding: 0 0 48px;
+    }
+
+    .timeline-content h3 {
+      font-family: var(--font-head);
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .timeline-content .org {
+      font-size: 0.85rem;
+      color: var(--accent2);
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+
+    .timeline-content p {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+    }
+
+    /* ── RESEARCH INTERESTS ── */
+    .topics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 16px;
+    }
+
+    .topic-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      transition: all 0.25s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .topic-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, transparent, rgba(61,232,160,0.03));
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .topic-card:hover { border-color: rgba(61,232,160,0.25); transform: translateY(-4px); }
+    .topic-card:hover::after { opacity: 1; }
+
+    .topic-icon {
+      font-size: 1.8rem;
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .topic-card h3 {
+      font-family: var(--font-head);
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .topic-card p {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* ── AWARDS ── */
+    .awards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 16px;
+    }
+
+    .award-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 22px 24px;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      transition: border-color 0.2s;
+    }
+
+    .award-card:hover { border-color: rgba(91,143,255,0.3); }
+
+    .award-year {
+      font-family: var(--font-head);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--accent2);
+      background: rgba(91,143,255,0.08);
+      border: 1px solid rgba(91,143,255,0.15);
+      border-radius: 6px;
+      padding: 4px 8px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .award-text h4 {
+      font-family: var(--font-head);
+      font-size: 0.92rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .award-text p {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    /* ── CONTACT ── */
+    #contact {
+      background: var(--surface);
+    }
+
+    .contact-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+
+    .contact-text h2 {
+      margin-bottom: 16px;
+    }
+
+    .contact-text p {
+      color: var(--text-muted);
+      margin-bottom: 32px;
+      font-size: 1rem;
+    }
+
+    .contact-links {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 18px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      text-decoration: none;
+      color: var(--text);
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+
+    .contact-link:hover { border-color: var(--accent); color: var(--accent); transform: translateX(4px); }
+
+    .contact-link .icon-box {
+      width: 36px; height: 36px;
+      border-radius: 8px;
+      background: var(--surface2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 40px;
+      border-top: 1px solid var(--border);
+      font-size: 0.82rem;
+      color: var(--text-dim);
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 16px 24px; }
+      .nav-links { gap: 18px; }
+      .container { padding: 0 20px; }
+      section { padding: 70px 0; }
+      .hero-inner { grid-template-columns: 1fr; gap: 40px; }
+      .hero-stats { grid-template-columns: repeat(3, 1fr); }
+      .contact-inner { grid-template-columns: 1fr; gap: 40px; }
+      .timeline-item { grid-template-columns: 80px 1px 1fr; gap: 0 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo">AM<span>M</span></div>
+    <ul class="nav-links">
+      <li><a href="#research">Research</a></li>
+      <li><a href="#publications">Publications</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#awards">Awards</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="container">
+      <div class="hero-inner">
+        <div>
+          <div class="hero-tag">PostDoctoral Researcher · DTU Copenhagen</div>
+          <h1>Alberto Maria<br><span class="highlight">Mongardini</span></h1>
+          <p class="hero-sub">
+            Researcher in <strong>blockchain security</strong>, <strong>social network analysis</strong>, and <strong>cyber deception</strong>.
+            Uncovering the mechanisms behind fraud, manipulation, and misinformation at scale.
+          </p>
+          <div class="hero-cta">
+            <a href="#publications" class="btn btn-primary">View Publications ↓</a>
+            <a href="#contact" class="btn btn-ghost">Get in Touch</a>
+          </div>
+        </div>
+
+        <div>
+          <div class="hero-card">
+            <div class="hero-card-avatar">AM</div>
+            <h3>Alberto Maria Mongardini</h3>
+            <div class="role">PostDoctoral Researcher</div>
+            <ul class="info-list">
+              <li>
+                <span class="icon">🏛</span>
+                <div><strong>Technical University of Denmark (DTU)</strong>Dept. of Applied Mathematics & CS · Cybersecurity Eng.</div>
+              </li>
+              <li>
+                <span class="icon">📍</span>
+                <div><strong>Location</strong>Lyngby, Denmark</div>
+              </li>
+              <li>
+                <span class="icon">🎓</span>
+                <div><strong>PhD in Computer Science</strong>Sapienza University of Rome · Summa cum Laude</div>
+              </li>
+              <li>
+                <span class="icon">🏆</span>
+                <div><strong>Marie Curie Seal of Excellence 2025</strong>Score: 95.8/100 · European Commission</div>
+              </li>
+            </ul>
+          </div>
+
+          <div class="hero-stats" style="margin-top: 16px;">
+            <div class="stat">
+              <div class="stat-num">11+</div>
+              <div class="stat-label">Publications</div>
+            </div>
+            <div class="stat">
+              <div class="stat-num">4</div>
+              <div class="stat-label">Grants</div>
+            </div>
+            <div class="stat">
+              <div class="stat-num">3</div>
+              <div class="stat-label">Intl. Collab.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESEARCH INTERESTS -->
+  <section id="research">
+    <div class="container">
+      <div class="section-header fade-in">
+        <div class="section-tag">Focus Areas</div>
+        <h2>Research Interests</h2>
+      </div>
+      <div class="topics-grid">
+        <div class="topic-card fade-in">
+          <span class="topic-icon">⛓</span>
+          <h3>Blockchain Security</h3>
+          <p>Investigating DeFi manipulation, NFT wash trading, sniper bots, meme coin fraud, and smart contract vulnerabilities across Ethereum, BSC, and Solana.</p>
+        </div>
+        <div class="topic-card fade-in">
+          <span class="topic-icon">🌐</span>
+          <h3>Social Network Analysis</h3>
+          <p>Detecting fake engagement, clone channels, coordinated inauthentic behavior, and conspiracy monetization on platforms like Telegram.</p>
+        </div>
+        <div class="topic-card fade-in">
+          <span class="topic-icon">🔐</span>
+          <h3>Cryptography & Privacy</h3>
+          <p>Designing privacy-preserving protocols and accountability mechanisms for Bitcoin transactions, including stealth addresses and attribute-driven accountability.</p>
+        </div>
+        <div class="topic-card fade-in">
+          <span class="topic-icon">🍯</span>
+          <h3>Cyber Deception</h3>
+          <p>Building honeypot systems, honeywords, and AI-driven deception techniques to defend against IP theft and advanced cyber threats.</p>
+        </div>
+        <div class="topic-card fade-in">
+          <span class="topic-icon">🤖</span>
+          <h3>AI for Security</h3>
+          <p>Applying machine learning and deep learning to threat detection, fraud identification, and anomaly detection in large-scale online systems.</p>
+        </div>
+        <div class="topic-card fade-in">
+          <span class="topic-icon">📊</span>
+          <h3>Open Science & Datasets</h3>
+          <p>Curating and publishing large-scale datasets (TGDataset: 120k+ channels, 400M+ messages) to enable reproducible security research.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PUBLICATIONS -->
+  <section id="publications">
+    <div class="container">
+      <div class="section-header fade-in">
+        <div class="section-tag">Research Output</div>
+        <h2>Selected Publications</h2>
+      </div>
+      <div class="pub-grid">
+
+        <div class="pub-card fade-in">
+          <div class="pub-venue top">USENIX '26</div>
+          <div class="pub-body">
+            <div class="pub-title">A Midsummer Meme's Dream: Investigating Market Manipulations in the Meme Coin Ecosystem</div>
+            <div class="pub-authors"><strong>Alberto Maria Mongardini</strong>, Alessandro Mei</div>
+            <div class="pub-meta">
+              <span class="badge badge-top">⭐ USENIX Security 2026</span>
+              <span class="badge badge-year">2026</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="pub-card fade-in">
+          <div class="pub-venue a">ACNS '26</div>
+          <div class="pub-body">
+            <div class="pub-title">Stealth and Beyond: Attribute-Driven Accountability in Bitcoin Transactions</div>
+            <div class="pub-authors"><strong>Alberto Maria Mongardini</strong>, Daniele Friolo, Giuseppe Ateniese</div>
+            <div class="pub-meta">
+              <span class="badge badge-a">ACNS 2026</span>
+              <span class="badge badge-year">2026</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="pub-card fade-in">
+          <div class="pub-venue top">KDD '25</div>
+          <div class="pub-body">
+            <div class="pub-title">TGDataset: Collecting and Exploring the Largest Telegram Channels Dataset</div>
+            <div class="pub-authors">Massimo La Morgia, Alessandro Mei, <strong>Alberto Maria Mongardini</strong></div>
+            <div class="pub-meta">
+              <span class="badge badge-top">⭐ KDD 2025</span>
+              <span class="badge badge-year">2025</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="pub-card fade-in">
+          <div class="pub-venue top">USENIX '25</div>
+          <div class="pub-body">
+            <div class="pub-title">The Conspiracy Money Machine: Uncovering Telegram's Conspiracy Channels and their Profit Model</div>
+            <div class="pub-authors">Vincenzo Imperati, Massimo La Morgia, Alessandro Mei, <strong>Alberto Maria Mongardini</strong>, Francesco Sassi</div>
+            <div class="pub-meta">
+              <span class="badge badge-top">⭐ USENIX Security 2025</span>
+              <span class="badge badge-year">2025</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="pub-card fade-in">
+          <div class="pub-venue a">T-IFS</div>
+          <div class="pub-body">
+            <div class="pub-title">DARD: Deceptive Approaches for Robust Defense against IP Theft</div>
+            <div class="pub-authors"><strong>Alberto Maria Mongardini</strong>, Massimo La Morgia, Sushil Jajodia, Luigi Vincenzo Mancini, Alessandro Mei</div>
+            <div class="pub-meta">
+              <span class="badge badge-a">IEEE T-IFS</span>
+              <span class="badge badge-year">2025</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="pub-card fade-in">
+          <div class="pub-venue">TOIT</div>
+          <div class="pub-body">
+            <div class="pub-title">The Blockchain Warfare: Investigating the Ecosystem of Sniper Bots on Ethereum and BNB Smart Chain</div>
+            <div class="pub-authors">Federico Cernera, Massimo La Morgia, Alessandro Mei, <strong>Alberto Maria Mongardini</strong>, Francesco Sassi</div>
+            <div class="pub-meta">
+              <span class="badge badge-year">ACM TOIT</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="pub-card fade-in">
+          <div class="pub-venue">ICDCS '23</div>
+          <div class="pub-body">
+            <div class="pub-title">A Game of NFTs: Characterizing NFT Wash Trading in the Ethereum Blockchain</div>
+            <div class="pub-authors">Massimo La Morgia, Alessandro Mei, <strong>Alberto Maria Mongardini</strong>, Eugenio Nemmi</div>
+            <div class="pub-meta">
+              <span class="badge badge-year">IEEE ICDCS 2023</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="container">
+      <div class="section-header fade-in">
+        <div class="section-tag">Career</div>
+        <h2>Experience & Education</h2>
+      </div>
+      <div class="timeline">
+
+        <div class="timeline-item fade-in">
+          <div class="timeline-date">Sep 2025 –<br>Present</div>
+          <div class="timeline-line"><div class="timeline-dot"></div><div class="timeline-connector"></div></div>
+          <div class="timeline-content">
+            <h3>PostDoctoral Researcher</h3>
+            <div class="org">Technical University of Denmark (DTU) · Lyngby, Denmark</div>
+            <p>Department of Applied Mathematics and Computer Science, Cybersecurity Engineering. Research on honeypots, AI-driven deception, and threat intelligence with Prof. Vasilomanolakis.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item fade-in">
+          <div class="timeline-date">Jun 2024 –<br>Aug 2025</div>
+          <div class="timeline-line"><div class="timeline-dot"></div><div class="timeline-connector"></div></div>
+          <div class="timeline-content">
+            <h3>PostDoctoral Researcher</h3>
+            <div class="org">Sapienza University of Rome · Rome, Italy</div>
+            <p>Department of Computer Science. Research on blockchain market manipulations, meme coin fraud, and Telegram ecosystem security.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item fade-in">
+          <div class="timeline-date">Apr 2023 –<br>Oct 2023</div>
+          <div class="timeline-line"><div class="timeline-dot"></div><div class="timeline-connector"></div></div>
+          <div class="timeline-content">
+            <h3>Short-Term Scholar</h3>
+            <div class="org">George Mason University · Fairfax, USA</div>
+            <p>Hosted by Prof. Giuseppe Ateniese. Collaboration on Bitcoin accountability and privacy-preserving protocols.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item fade-in">
+          <div class="timeline-date">2020 – 2024</div>
+          <div class="timeline-line"><div class="timeline-dot"></div><div class="timeline-connector"></div></div>
+          <div class="timeline-content">
+            <h3>PhD in Computer Science</h3>
+            <div class="org">Sapienza University of Rome · Italy</div>
+            <p>Advisor: Prof. Alessandro Mei. Cycle XXXVI. Grade: <strong style="color: var(--accent)">Summa cum Laude</strong>.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item fade-in">
+          <div class="timeline-date">2019 – 2020</div>
+          <div class="timeline-line"><div class="timeline-dot"></div><div class="timeline-connector"></div></div>
+          <div class="timeline-content">
+            <h3>MSc in Computer Science</h3>
+            <div class="org">Sapienza University of Rome · Italy</div>
+            <p>Grade: <strong style="color: var(--accent)">Summa cum Laude</strong>.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item fade-in">
+          <div class="timeline-date">2015 – 2018</div>
+          <div class="timeline-line"><div class="timeline-dot"></div><div class="timeline-connector"></div></div>
+          <div class="timeline-content">
+            <h3>BSc in Computer Science</h3>
+            <div class="org">Sapienza University of Rome · Italy</div>
+            <p>Advisor: Prof. Alessandro Mei. Grade: <strong style="color: var(--accent)">Summa cum Laude</strong>.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- AWARDS -->
+  <section id="awards">
+    <div class="container">
+      <div class="section-header fade-in">
+        <div class="section-tag">Recognition</div>
+        <h2>Awards & Fellowships</h2>
+      </div>
+      <div class="awards-grid">
+        <div class="award-card fade-in">
+          <span class="award-year">2026</span>
+          <div class="award-text">
+            <h4>Marie Curie Seal of Excellence</h4>
+            <p>European Commission, Marie Curie Postdoctoral Fellowships 2025. Score: 95.8/100</p>
+          </div>
+        </div>
+        <div class="award-card fade-in">
+          <span class="award-year">2025</span>
+          <div class="award-text">
+            <h4>Postdoctoral Research Fellowship</h4>
+            <p>Technical University of Denmark – 16-month research fellowship, Dept. of Cybersecurity</p>
+          </div>
+        </div>
+        <div class="award-card fade-in">
+          <span class="award-year">2025</span>
+          <div class="award-text">
+            <h4>Research Collaborator Contract</h4>
+            <p>Sapienza University of Rome – Independent research on meme coin market manipulations</p>
+          </div>
+        </div>
+        <div class="award-card fade-in">
+          <span class="award-year">2024</span>
+          <div class="award-text">
+            <h4>Postdoctoral Research Fellowship</h4>
+            <p>Sapienza University of Rome – 1-year fellowship, Dept. of Computer Science</p>
+          </div>
+        </div>
+        <div class="award-card fade-in">
+          <span class="award-year">2023</span>
+          <div class="award-text">
+            <h4>IEEE ICDCS Travel Grant</h4>
+            <p>IEEE Computer Society's Technical Community on Distributed Processing (~$1,000)</p>
+          </div>
+        </div>
+        <div class="award-card fade-in">
+          <span class="award-year">2020</span>
+          <div class="award-text">
+            <h4>Doctoral Scholarship</h4>
+            <p>3-year doctoral scholarship at Sapienza University of Rome, cycle XXXVI</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="container">
+      <div class="contact-inner">
+        <div class="contact-text fade-in">
+          <div class="section-tag" style="display:inline-block; margin-bottom: 20px;">Contact</div>
+          <h2>Let's Connect</h2>
+          <p>I'm always open to discussing research collaborations, speaking invitations, or just exchanging ideas on blockchain security, social network analysis, or cyber deception.</p>
+          <a href="mailto:among@dtu.dk" class="btn btn-primary" style="display: inline-flex; width: fit-content;">Email Me →</a>
+        </div>
+        <div class="contact-links fade-in">
+          <a href="https://github.com/SystemsLab-Sapienza" target="_blank" class="contact-link">
+            <span class="icon-box">⚡</span>
+            GitHub – SystemsLab-Sapienza
+          </a>
+          <a href="https://zenodo.org/records/17830944" target="_blank" class="contact-link">
+            <span class="icon-box">📦</span>
+            Zenodo – Open Research Datasets
+          </a>
+          <a href="https://dtu.dk" target="_blank" class="contact-link">
+            <span class="icon-box">🏛</span>
+            Technical University of Denmark
+          </a>
+          <a href="#publications" class="contact-link">
+            <span class="icon-box">📄</span>
+            Download CV
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2025 Alberto Maria Mongardini · Built with care · DTU, Lyngby, Denmark</p>
+  </footer>
+
+  <script>
+    // Intersection Observer for fade-in animations
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    // Stagger children
+    document.querySelectorAll('.pub-grid, .topics-grid, .awards-grid, .timeline').forEach(grid => {
+      grid.querySelectorAll('.fade-in').forEach((el, i) => {
+        el.style.transitionDelay = `${i * 0.07}s`;
+      });
+    });
+  </script>
+</body>
+</html>
